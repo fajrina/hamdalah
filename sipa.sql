@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2018 at 01:28 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Dec 08, 2019 at 10:28 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,47 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sipas`
+-- Database: `sipa`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `id_order` int(11) NOT NULL,
+  `nama_order` varchar(255) NOT NULL,
+  `total_order` int(11) NOT NULL,
+  `noHp_order` varchar(20) DEFAULT NULL,
+  `jmlbeli_order` int(11) DEFAULT NULL,
+  `jmlharga_order` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paket`
+--
+
+CREATE TABLE `paket` (
+  `id_paket` int(11) NOT NULL,
+  `nama_paket` varchar(225) DEFAULT NULL,
+  `desc_paket` text DEFAULT NULL,
+  `harga_paket` double DEFAULT NULL,
+  `kuota_paket` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paket`
+--
+
+INSERT INTO `paket` (`id_paket`, `nama_paket`, `desc_paket`, `harga_paket`, `kuota_paket`) VALUES
+(1, 'Paket Hemat', 'Tiket Parkir \r\n		motor: Rp.2000,00/jam\r\nTiket Masuk\r\n		Rp.45.000,00/orang', 47000, 50),
+(2, 'Paket Hemat 2', 'Tiket Parkir\r\n		Mobil : Rp.5.000/jam\r\nTiket Masuk\r\n		Rp.45.000/orang', 50000, 50),
+(3, 'Paket Lengkap 1', 'Tiket Parkir\r\n		motor : Rp.2000/jam\r\nTiket Masuk\r\n		Rp.45.000/orang\r\nTiket Jeep\r\n		Rp.100.000/mobil jeep', 147000, 50),
+(4, 'Paket Lengkap 2', 'Tiket Parkir\r\n		mobil : Rp.5.000/jam\r\nTiket Masuk \r\n		Rp.45.000/orang\r\ntiket Jeep\r\n		Rp.100.000/mobil jeep', 150000, 50);
 
 -- --------------------------------------------------------
 
@@ -58,7 +97,7 @@ CREATE TABLE `wisata` (
   `id_wisata` tinyint(4) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `deskripsi` text NOT NULL,
-  `waktu` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `waktu` datetime NOT NULL DEFAULT current_timestamp(),
   `gambar` varchar(255) NOT NULL,
   `tampil` int(10) UNSIGNED NOT NULL,
   `validasi` enum('ya','tidak') NOT NULL DEFAULT 'tidak',
@@ -77,11 +116,23 @@ INSERT INTO `wisata` (`id_wisata`, `judul`, `deskripsi`, `waktu`, `gambar`, `tam
 (12, 'Desa Bongo', 'snfjdbsf sbdajh', '2018-08-28 03:10:25', 'DESA BONGO.jpg', 0, 'tidak', 10),
 (13, 'Monumen Nanti', 'nsjdsj fbhfbhqj fbqhjfbqj wwsdbwqhjbdf qwhdbqjhf qdhbqhjd', '2018-08-28 03:49:00', 'Monumen Nanti.jpeg', 0, 'ya', 10),
 (15, 'Jejak Kaki', 'SNDJSDBJH SDBQHJDBHQB WBDJQ', '2018-08-28 05:59:25', 'Tangga-2000-dan-Jejak-Kaki-Lahilote.jpg', 0, 'tidak', 11),
-(16, 'Hiu Paus', 'dhabsdhb wdqbbdq dq', '2018-08-28 06:24:36', 'hiu-paus-jadi-objek-wisata-bahari.jpg', 0, 'ya', 10);
+(16, 'Hiu Paus', 'dhabsdhb wdqbbdq dq', '2018-08-28 06:24:36', 'hiu-paus-jadi-objek-wisata-bahari.jpg', 2, 'ya', 10);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id_order`);
+
+--
+-- Indexes for table `paket`
+--
+ALTER TABLE `paket`
+  ADD PRIMARY KEY (`id_paket`);
 
 --
 -- Indexes for table `user`
@@ -99,6 +150,18 @@ ALTER TABLE `wisata`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `paket`
+--
+ALTER TABLE `paket`
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
